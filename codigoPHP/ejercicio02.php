@@ -7,12 +7,12 @@
             error_reporting(E_ALL);
         ?>
         <?php
-        require_once '../core/ConexionDB';
+        require_once '../core/ConexionDB.php';
             try{
                 $miDB = new PDO($host,$USER,$PASSWORD);
-                echo "<h2>Conexion Establecida</h2><br>";
-                echo "<h3>Porpiedades</h3>";
-                
+                $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO', MYSQLI_STORE_RESULT);
+                $registroArray = $resultadoConsulta->fetch_object();
+                echo $registroArray;
             }catch(PDOException $e){
                 echo $e->getMessage()."<br>";
             }

@@ -1,10 +1,4 @@
 USE DBSGVDWESProyectoTema4;
-CREATE TABLE T02_DEPARTAMENTO(
-    T02_CodDepartamento VARCHAR(3) PRIMARY KEY,
-    T02_DescDepartamento CHAR(255) not null,
-    T02_FechaCreacionDepartamento DATETIME  default current_timestamp,
-    T02_VolumenDeNegocio FLOAT default 0,
-    T02_FechaBajaDepartamento DATETIME default current_timestamp);
 INSERT INTO T02_DEPARTAMENTO () VALUES
   ('ADM', 'Administración', '2024-01-15 09:00:00', 125000.00, NULL),
   ('COM', 'Comercial',      '2024-01-15 09:00:00', 240000.00, NULL),
