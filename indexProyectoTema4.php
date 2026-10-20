@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>0</td>
+                    <td>1</td>
                     <td>Conexión a la base de datos con la cuenta usuario y tratamiento de errores.</td>
                     <td><a href="codigoPHP/ejercicio01.php">Ejecutar</a></td>
                     <td><a href="mostrarcodigo/muestraEjercicio01.php">Codigo en progreso</a></td>
@@ -54,7 +54,7 @@
         <footer>
             <p><time datetime="2026-09-14">2026-2027</time> IES LOS SAUCES. ©Todos los derechos reservados</p>
             <p>Santiago González Vicente. 14/09/2026</p>
-            <a href="https://github.com/CuentaEducaSantiago/SGVDWESProyectoTema3" target="_blank" rel="noopener"><i class="fa fa-github" style="font-size:40px; margin-right: 15px;"></i></a>
+            <a href="https://github.com/CuentaEducaSantiago/SGVDWESProyectoTema4" target="_blank" rel="noopener"><i class="fa fa-github" style="font-size:40px; margin-right: 15px;"></i></a>
             <a href="../indexProyectoDWES.php"><i class="fa fa-home" style="font-size:40px; margin-right: 15px;"></i></a>
         </footer>
     </body>
