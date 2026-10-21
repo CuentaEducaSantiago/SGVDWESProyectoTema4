@@ -26,8 +26,8 @@
                 &lt;/head&gt;
                 &lt;body&gt;
                 <blockquote>
-                    <span style="color: #DD0000">CREATE USER 'adminsql'@'localhost' IDENTIFIED BY 'paso';</span>
-                    <span style="color: #DD0000">GRANT ALL PRIVILEGES ON *.* TO 'adminsql'@'localhost' WITH GRANT OPTION</span>;
+                    <span style="color: #DD0000">CREATE USER 'userSGVDWESProyectoTema4'@'%' IDENTIFIED BY 'paso';</span>
+                    <span style="color: #DD0000">GRANT ALL PRIVILEGES ON *.* TO 'userSGVDWESProyectoTema4'@'%' WITH GRANT OPTION</span>;
                     <span style="color: #DD0000">FLUSH PRIVILEGES;</span>
                     <span style="color: #0000BB">CREATE DATABASE IF NOT EXISTS DBSGVDWESProyectoTema4;</span>
                 </blockquote>    &lt;/body&gt;

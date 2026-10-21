@@ -32,7 +32,6 @@
                     <span style="color: #DD0000">T02_FechaCreacionDepartamento DATETIME default default current_timestamp,</span>
                     <span style="color: #DD0000">T02_VolumenDeNegocio FLOAT default 0,</span>;
                     <span style="color: #0000BB">T02_FechaBajaDepartamento DATETIME default default current_timestamp,</span>
-                    <span style="color: #0000BB">CONSTRAINT T02_VolumenDeNegocio CHECK (T02_VolumenDeNegocio >= -3.402823466E+38 AND T02_VolumenDeNegocio <= 1.175494351E-38);</span>
                 </blockquote>    &lt;/body&gt;
             &lt;/html&gt;
             </code>

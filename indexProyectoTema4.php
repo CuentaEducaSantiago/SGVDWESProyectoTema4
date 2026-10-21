@@ -53,7 +53,7 @@
                     <td>2</td>
                     <td>Mostrar el contenido de la tabla Departamento y el número de registros.</td>
                     <td><a href="codigoPHP/ejercicio02.php">Ejecutar</a></td>
-                    <td><a href="mostrarcodigo/muestraEjercicio01.php">Codigo en progreso</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio02.php">Codigo en progreso</a></td>
                 </tr>
             </tbody>
         </table>

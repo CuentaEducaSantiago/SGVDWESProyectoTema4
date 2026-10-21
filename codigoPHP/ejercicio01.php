@@ -8,7 +8,7 @@
         ?>
         <?php
         require_once '../core/ConexionDB.php'; //conectar al archivo para obetener conexion a la base de datos
-        $ar= [
+        $atributes= [
             'AUTOCOMMIT', 'ERRMODE' , 'CASE' , 'CLIENT_VERSION', 'CONNECTION_STATUS',
             'ORACLE_NULLS', 'PERSISTENT', 'PREFETCH', 'SERVER_INFO', 'SERVER_VERSION', 'TIMEOUT'
         ]; //propiedades
@@ -16,7 +16,7 @@
                 $miDB = new PDO($host,$USER,$PASSWORD); //conectando a la base de datos
                 echo "<h2>Conexion Establecida</h2><br>";
                 echo "<h3>Porpiedades</h3>";
-                foreach ($ar as $atributo) { //para mostrar las propiedades
+                foreach ($atributes as $atributo) { //para mostrar las propiedades
                 echo "PDO: ATTR: ".$atributo.": ";
                     try {
                         echo '<span class="azul">'.$miDB->getAttribute( constant( "PDO::ATTR_$atributo" ) ) . "</span><br>";

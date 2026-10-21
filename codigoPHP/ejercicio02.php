@@ -1,19 +1,49 @@
 <html>
-    <head></head>
+    <head>
+        <title>Ejercicio 2</title>
+        <style>
+            table, td, tr, th{
+                border: 3px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
     <body>
         <?php
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
+            error_reporting(E_ALL); //para ver errores
         ?>
         <?php
-        require_once '../core/ConexionDB.php';
+        require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos
             try{
-                $miDB = new PDO($host,$USER,$PASSWORD);
-                $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO', MYSQLI_STORE_RESULT);
-                $registroArray = $resultadoConsulta->fetch_object();
-                echo $registroArray;
-            }catch(PDOException $e){
+                $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
+                $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO');//consulta
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>Codigo</th>";
+                echo "<th>Nombre</th>";
+                echo "<th>Fecha Creacion</th>";
+                echo "<th>Valor de Departmento</th>";
+                echo "<th>FechaBaja</th>";
+                echo "</tr>";
+                while ($registro = $resultadoConsulta ->fetch()){//mostrar resultados
+                    echo "<tr>";
+                    echo '<td>'.$registro['T02_CodDepartamento'].'</td>';
+                    echo '<td>'.$registro["T02_DescDepartamento"].'</td>';
+                    $FechaCreacion = new DateTime($registro["T02_FechaCreacionDepartamento"]);
+                    echo '<td>'.$FechaCreacion->format('d/m/Y').'</td>';
+                    echo '<td>'.number_format($registro["T02_VolumenDeNegocio"],2,',','.').' €</td>';
+                    if ($registro["T02_FechaBajaDepartamento"]!==null) {//comprobacion null
+                        $FechaBaja = new DateTime($registro["T02_FechaBajaDepartamento"]);
+                        echo '<td>'.$FechaBaja->format('d/m/Y').'</td>';
+                    } else {
+                        echo '<td></td>';
+                    }
+                    echo "<tr>";
+                }
+                echo "<table>";
+            }catch(PDOException $e){//para atrapar excepciones
                 echo $e->getMessage()."<br>";
             }
         ?>
