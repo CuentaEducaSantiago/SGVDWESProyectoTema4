@@ -45,10 +45,36 @@
                         $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
                     if(is_null($_POST['Dnombre'])||mb_strtoupper($_POST['Dnombre'], 'UTF-8')||str_word_count(trim($_POST['Dnombre']))){
                         $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO');//consulta
+                        $resultadoConsulta2 = $miDB->exec('select * from T02_DEPARTAMENTO');//consulta
                     }
                     else{
                         $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO where T02_CodDepartamento='.$_POST['Dnombre']);//consulta
+                        $resultadoConsulta2 = $miDB->exec('select * from T02_DEPARTAMENTO where T02_CodDepartamento='.$_POST['Dnombre']);//consulta
                     }
+                    echo "<h3>Exec</h3>";
+                    echo "<th>Codigo</th>";
+                    echo "<th>Nombre</th>";
+                    echo "<th>Fecha Creacion</th>";
+                    echo "<th>Valor de Departmento</th>";
+                    echo "<th>FechaBaja</th>";
+                    echo "</tr>";
+                    while ($registro = $resultadoConsulta ->fetch()){//mostrar resultados
+                        echo "<tr>";
+                        echo '<td>'.$registro['T02_CodDepartamento'].'</td>';
+                        echo '<td>'.$registro["T02_DescDepartamento"].'</td>';
+                        $FechaCreacion = new DateTime($registro["T02_FechaCreacionDepartamento"]);
+                        echo '<td>'.$FechaCreacion->format('d/m/Y').'</td>';
+                        echo '<td>'.number_format($registro["T02_VolumenDeNegocio"],2,',','.').' €</td>';
+                        if ($registro["T02_FechaBajaDepartamento"]!==null) {//comprobacion null
+                            $FechaBaja = new DateTime($registro["T02_FechaBajaDepartamento"]);
+                            echo '<td>'.$FechaBaja->format('d/m/Y').'</td>';
+                        } else {
+                            echo '<td></td>';
+                        }
+                        echo "<tr>";
+                    }
+                    echo "<table>";
+                    echo "<h3>Querry</h3>";
                     echo "<th>Codigo</th>";
                     echo "<th>Nombre</th>";
                     echo "<th>Fecha Creacion</th>";
