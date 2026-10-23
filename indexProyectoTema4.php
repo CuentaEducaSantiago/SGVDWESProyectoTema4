@@ -55,13 +55,20 @@
                     <td><a href="codigoPHP/ejercicio02.php">Ejecutar</a></td>
                     <td><a href="mostrarcodigo/muestraEjercicio02.php">Codigo en progreso</a></td>
                 </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo
+                    DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos).</td>
+                    <td><a href="codigoPHP/ejercicio03.php">Ejecutar</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio02.php">Codigo en progreso</a></td>
+                </tr>
             </tbody>
         </table>
         <footer>
             <p><time datetime="2026-09-14">2026-2027</time> IES LOS SAUCES. ©Todos los derechos reservados</p>
             <p>Santiago González Vicente. 14/09/2026</p>
             <a href="https://github.com/CuentaEducaSantiago/SGVDWESProyectoTema4" target="_blank" rel="noopener"><i class="fa fa-github" style="font-size:40px; margin-right: 15px;"></i></a>
-            <a href="../indexProyectoDWES.php"><i class="fa fa-home" style="font-size:40px; margin-right: 15px;"></i></a>
+            <a href="../indexDWESProyecto.php"><i class="fa fa-home" style="font-size:40px; margin-right: 15px;"></i></a>
         </footer>
     </body>
 </html>
