@@ -18,61 +18,132 @@
             <h2>Ejercicio 3</h2>
         </header>
         <main>
-        <h1><a href='../indexProyectoTema3.php'>volver</a></h1>
-            <div class="form">
+        <h1><a href='../indexProyectoTema4.php'>volver</a></h1>
                 <?php
                     ini_set('display_errors', 1);
                     ini_set('display_startup_errors', 1);
                     error_reporting(E_ALL);
-                    
                 ?>
-                <form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre"/>
-                    <br>
-                    <input type="submit" name="submit" value="Enviar"/>
-                </form>
-            </div><!-- Espacio del form -->
             <div class="ejercicio">
                 <?php
-                if(isset($_POST["submit"])){
-                        require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos
+                        require_once'../core/231018libreriaValidacion.php'; //archivo para validaciones
+                        require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos   
+                        $entradaOk = true;// Variable que nos indica que todo va bien
+                        $aErrores = [
+                            'Dnombre' => '',
+                            'Ddescripcion' => '',
+                            'DFechaCreacion' => '',
+                            'Dsaldo' => '',
+                            'DFechaBaja' => ''
+                        ];// Array donde recogemos los mensajes de error
+                        $aRespuestas = [
+                            'Dnombre' => '',
+                            'Ddescripcion' => '',
+                            'DFechaCreacion' => '',
+                            'Dsaldo' => '',
+                            'DFechaBaja' => ''
+                        ];// Array donde recogeremos las respuestas correctas (si $entradaOK)
                         try{
+                            if(isset($_POST["submit"])){
                             $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
                             if(mb_strtoupper($_POST['Dnombre'], 'UTF-8')||str_word_count(trim($_POST['Dnombre']))||$_POST['Dnombre']!==""){
-                                $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO where T02_CodDepartamento="'.$_POST['Dnombre'].'"');//consulta
+                                $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
+                                $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
+                                $aRespuestas['DFechaCreacion'] = $_POST['DFechaCreacion'] ?? '';
+                                $aRespuestas['Dsaldo'] = $_POST['Dsaldo'] ?? '';
+                                $aRespuestas['DFechaBaja'] = $_POST['DFechaBaja'] ?? '';
+                                $aErrores['Dnombre'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Dnombre'],100,0,1);
+                                $aErrores['Ddescripcion'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Ddescripcion'],100,0,1);
+                                $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion'],"01/01/2027","01/01/1900", 1);
+                                $aErrores['Dsaldo'] = validacionFormularios::comprobarFloat($aRespuestas['Dsaldo'],100,0,1);
+                                $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja'],"01/01/2027","01/01/1900", 1);
                             }
                             elseif(is_null($_POST['Dnombre'])||$_POST['Dnombre']==""){
-                                $resultadoConsulta = $miDB->query('select * from T02_DEPARTAMENTO');//consulta
+                                $entradaOk = false;
+                                $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
+                                $aErrores['Dnombre'] ="Error en sintaxis o contenido";
+                                $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
+                                $aRespuestas['DFechaCreacion'] = $_POST['DFechaCreacion'] ?? '';
+                                $aRespuestas['Dsaldo'] = $_POST['Dsaldo'] ?? '';
+                                $aRespuestas['DFechaBaja'] = $_POST['DFechaBaja'] ?? '';
+                                $aErrores['Ddescripcion'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Ddescripcion'],100,0,1);
+                                $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
+                                $aErrores['Dsaldo'] = validacionFormularios::comprobarFloat($aRespuestas['Dsaldo'],100,0,1);
+                                $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
                             }
-                            echo "<table>";
-                            echo "<th>Codigo</th>";
-                            echo "<th>Nombre</th>";
-                            echo "<th>Fecha Creacion</th>";
-                            echo "<th>Valor de Departmento</th>";
-                            echo "<th>FechaBaja</th>";
-                            echo "</tr>";
-                            while ($registro = $resultadoConsulta ->fetch()){//mostrar resultados
-                                echo "<tr>";
-                                echo '<td>'.$registro['T02_CodDepartamento'].'</td>';
-                                echo '<td>'.$registro["T02_DescDepartamento"].'</td>';
-                                $FechaCreacion = new DateTime($registro["T02_FechaCreacionDepartamento"]);
-                                echo '<td>'.$FechaCreacion->format('d/m/Y').'</td>';
-                                echo '<td>'.number_format(floatval(str_replace(',', '.', $registro["T02_VolumenDeNegocio"])),2,',','.').' €</td>';
-                                if ($registro["T02_FechaBajaDepartamento"]!==null) {//comprobacion null
-                                    $FechaBaja = new DateTime($registro["T02_FechaBajaDepartamento"]);
-                                    echo '<td>'.$FechaBaja->format('d/m/Y').'</td>';
-                                } else {
-                                    echo '<td></td>';
+                        foreach ($aErrores as $campo => $valor) {
+                                if($valor !== null){
+                                    $entradaOk = false;
                                 }
-                                echo "<tr>";
                             }
-                            echo "</table>";
-                    }catch(PDOException $e){//para atrapar excepciones
-                        echo $e->getMessage()."<br>";
-                    }
-                }
-                ?>
+                        } else{
+                            $entradaOk = false;     // Si el formulario no se ha rellenado nunca.
+                        }
+                                // Tratamiento del formulario
+                        if($entradaOk){
+                            $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
+                            $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
+                            $aRespuestas['DFechaCreacion'] = $_POST['DFechaCreacion'] ?? '';
+                            $aRespuestas['Dsaldo'] = $_POST['Dsaldo'] ?? '';
+                            $aRespuestas['DFechaBaja'] = $_POST['DFechaBaja'] ?? '';
+                            $sqlInsert = <<<sql
+                                INSERT INTO T02_DEPARTAMENTO (T02_CodDepartamento, T02_DescDepartamento, T02_FechaCreacionDepartamento, T02_VolumenDeNegocio, T02_FechaBajaDepartamento)
+                                VALUES (?, ?, ?, ?, ?)
+                            sql;
+                            
+                            $consultaInsert = $miDB->prepare($sqlInsert);
+                            $consultaInsert->bindParam(1, $aRespuestas['Dnombre']);
+                            $consultaInsert->bindParam(2, $aRespuestas['Ddescripcion']);
+                            $consultaInsert->bindParam(3, $aRespuestas['DFechaCreacion']);
+                            $consultaInsert->bindParam(4, $aRespuestas['Dsaldo']);
+                            $consultaInsert->bindParam(5, $aRespuestas['DFechaBaja']);
+                            
+                            if($consultaInsert->execute()){
+                                echo '<p class="exito">¡El departamento ha sido insertado correctamente en la Base de Datos!</p>';
+                            }
+                        }
+                        else{
+                        ?>
+                    <form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre" value="<?php echo htmlspecialchars($aRespuestas['Dnombre']); ?>"/>
+                        <?php
+                        // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
+                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dnombre']}</span>";}
+                        ?>
+                        <br>
+                        Introduce su descripcion: <input type="text" id="Ddescripcion" name="Ddescripcion"  value="<?php echo htmlspecialchars($aRespuestas['Ddescripcion']); ?>"/>
+                        <?php
+                        // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
+                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Ddescripcion']}</span>";}
+                        ?>
+                        <br>
+                        Introduce una fecha de creacion: <input type="date" id="DFechaCreacion" name="DFechaCreacion" value="<?php echo htmlspecialchars($aRespuestas['DFechaCreacion']); ?>"/>
+                        <?php
+                        // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
+                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaCreacion']}</span>";}
+                        ?>
+                        <br>
+                        Introduce un volumen de departamento: <input type="number" id="Dsaldo" name="Dsaldo" value="<?php echo htmlspecialchars($aRespuestas['Dsaldo']); ?>" step="any"/>
+                        <?php
+                        // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
+                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dsaldo']}</span>";}
+                        ?>
+                        <br>
+                        Introduce una fecha de baja de un departamento: <input type="date" id="DFechaBaja" name="DFechaBaja" value="<?php echo htmlspecialchars($aRespuestas['DFechaBaja']); ?>"/>
+                        <?php
+                        // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
+                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaBaja']}</span>";}
+                        ?>
+                        <br>
+                        <input type="submit" name="submit" value="Enviar"/>
+                    </form> 
             </div>
+            <?php
+            } // Fin si ($entradaOK)
+            }catch(PDOException $e){//para atrapar excepciones
+                echo $e->getMessage()."<br>";
+            }
+            ?>
         </main>
         <footer>
             <div>

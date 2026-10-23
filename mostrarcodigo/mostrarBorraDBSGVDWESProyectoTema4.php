@@ -27,7 +27,7 @@
                 &lt;body&gt;
                 <blockquote>
                     <span style="color: #DD0000">DROP DATABASE IF EXISTS DB2SGVDWESProyectoTema4;</span>
-                    <span style="color: #DD0000">DROP USER 'adminsql'@'localhost';</span>
+                    <span style="color: #DD0000">DROP USER 'userSGVDWESProyectoTema4'@'%';</span>
                 </blockquote>    &lt;/body&gt;
             &lt;/html&gt;
             </code>

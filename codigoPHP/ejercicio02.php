@@ -10,6 +10,7 @@
         </style>
     </head>
     <body>
+        <h1><a href='../indexProyectoTema4.php'>volver</a></h1>
         <?php
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);

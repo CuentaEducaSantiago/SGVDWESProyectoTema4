@@ -30,6 +30,12 @@
                     <span style="color: #DD0000">GRANT ALL PRIVILEGES ON *.* TO 'userSGVDWESProyectoTema4'@'%' WITH GRANT OPTION</span>;
                     <span style="color: #DD0000">FLUSH PRIVILEGES;</span>
                     <span style="color: #0000BB">CREATE DATABASE IF NOT EXISTS DBSGVDWESProyectoTema4;</span>
+                    <span style="color: #0000BB">CREATE TABLE T02_DEPARTAMENTO(</span>
+                        <span style="color: #0000BB">T02_CodDepartamento VARCHAR(3) PRIMARY KEY,</span>
+                        <span style="color: #0000BB">T02_DescDepartamento CHAR(255) not null,</span>
+                        <span style="color: #0000BB">T02_FechaCreacionDepartamento DATETIME  default current_timestamp,</span>
+                        <span style="color: #0000BB">T02_VolumenDeNegocio FLOAT default 0,</span>
+                        <span style="color: #0000BB">T02_FechaBajaDepartamento DATETIME default current_timestamp);</span>
                 </blockquote>    &lt;/body&gt;
             &lt;/html&gt;
             </code>

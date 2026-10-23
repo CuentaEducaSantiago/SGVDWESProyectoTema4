@@ -26,12 +26,15 @@
                 &lt;/head&gt;
                 &lt;body&gt;
                 <blockquote>
-                    <span style="color: #DD0000">CREATE TABLE T02_DEPARTAMENTO(</span>
-                    <span style="color: #DD0000">T02_CodDepartamento PRIMARY KEY VARCHAR(3),</span>;
-                    <span style="color: #0000BB">T02_DescDepartamento CHAR(255) not null,</span>
-                    <span style="color: #DD0000">T02_FechaCreacionDepartamento DATETIME default default current_timestamp,</span>
-                    <span style="color: #DD0000">T02_VolumenDeNegocio FLOAT default 0,</span>;
-                    <span style="color: #0000BB">T02_FechaBajaDepartamento DATETIME default default current_timestamp,</span>
+                    <span style="color: #DD0000">USE DBSGVDWESProyectoTema4;</span>
+                    <span style="color: #DD0000">INSERT INTO T02_DEPARTAMENTO () VALUES</span>
+                    <span style="color: #DD0000">('ADM', 'Administración', '2024-01-15 09:00:00', 125000.00, NULL),</span>;
+                    <span style="color: #0000BB">('COM', 'Comercial',      '2024-01-15 09:00:00', 240000.00, NULL),</span>
+                    <span style="color: #DD0000">('FIN', 'Finanzas',       '2024-01-15 09:00:00', 180000.00, '2024-07-28 10:00:00'),</span>
+                    <span style="color: #DD0000">('TEC', 'Tecnología',     '2024-01-15 09:00:00', 310000.00, NULL),</span>;
+                    <span style="color: #0000BB">('OPT', 'Optimizaciones',       '2024-01-15 09:00:00', 180000.00, '2024-07-28 10:00:00'),</span>
+                    <span style="color: #DD0000">('INV', 'Inversiones',     '2024-01-15 09:00:00', 310000.00, NULL),</span>;
+                    <span style="color: #0000BB">('VEN', 'Ventas',         '2024-01-15 09:00:00', 275000.00, NULL);</span>
                 </blockquote>    &lt;/body&gt;
             &lt;/html&gt;
             </code>
