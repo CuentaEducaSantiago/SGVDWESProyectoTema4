@@ -46,20 +46,7 @@
                         try{
                             if(isset($_POST["submit"])){
                             $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
-                            if(mb_strtoupper($_POST['Dnombre'], 'UTF-8')||str_word_count(trim($_POST['Dnombre']))||$_POST['Dnombre']!==""){
                                 $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
-                                $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
-                                $aRespuestas['DFechaCreacion'] = $_POST['DFechaCreacion'] ?? '';
-                                $aRespuestas['Dsaldo'] = $_POST['Dsaldo'] ?? '';
-                                $aRespuestas['DFechaBaja'] = $_POST['DFechaBaja'] ?? '';
-                                $aErrores['Dnombre'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Dnombre'],100,0,1);
-                                $aErrores['Ddescripcion'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Ddescripcion'],100,0,1);
-                                $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion'],"01/01/2027","01/01/1900", 1);
-                                $aErrores['Dsaldo'] = validacionFormularios::comprobarFloat($aRespuestas['Dsaldo'],100,0,1);
-                                $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja'],"01/01/2027","01/01/1900", 1);
-                            }
-                            elseif(is_null($_POST['Dnombre'])||$_POST['Dnombre']==""){
-                                $entradaOk = false;
                                 $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
                                 $aErrores['Dnombre'] ="Error en sintaxis o contenido";
                                 $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
@@ -70,7 +57,6 @@
                                 $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
                                 $aErrores['Dsaldo'] = validacionFormularios::comprobarFloat($aRespuestas['Dsaldo'],100,0,1);
                                 $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
-                            }
                         foreach ($aErrores as $campo => $valor) {
                                 if($valor !== null){
                                     $entradaOk = false;
@@ -105,7 +91,7 @@
                         else{
                         ?>
                     <form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                        Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre" value="<?php echo htmlspecialchars($aRespuestas['Dnombre']); ?>"/>
+                        Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre" style="text-transform:uppercase" maxlength="3" value="<?php echo htmlspecialchars($aRespuestas['Dnombre']); ?>"/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
                         if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dnombre']}</span>";}

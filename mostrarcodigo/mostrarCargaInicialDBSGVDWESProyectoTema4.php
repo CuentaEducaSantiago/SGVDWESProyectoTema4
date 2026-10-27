@@ -26,16 +26,11 @@
                 &lt;/head&gt;
                 &lt;body&gt;
                 <blockquote>
-                    <span style="color: #DD0000">USE DBSGVDWESProyectoTema4;</span>
-                    <span style="color: #DD0000">INSERT INTO T02_DEPARTAMENTO () VALUES</span>
-                    <span style="color: #DD0000">('ADM', 'Administración', '2024-01-15 09:00:00', 125000.00, NULL),</span>;
-                    <span style="color: #0000BB">('COM', 'Comercial',      '2024-01-15 09:00:00', 240000.00, NULL),</span>
-                    <span style="color: #DD0000">('FIN', 'Finanzas',       '2024-01-15 09:00:00', 180000.00, '2024-07-28 10:00:00'),</span>
-                    <span style="color: #DD0000">('TEC', 'Tecnología',     '2024-01-15 09:00:00', 310000.00, NULL),</span>;
-                    <span style="color: #0000BB">('OPT', 'Optimizaciones',       '2024-01-15 09:00:00', 180000.00, '2024-07-28 10:00:00'),</span>
-                    <span style="color: #DD0000">('INV', 'Inversiones',     '2024-01-15 09:00:00', 310000.00, NULL),</span>;
-                    <span style="color: #0000BB">('VEN', 'Ventas',         '2024-01-15 09:00:00', 275000.00, NULL);</span>
-                </blockquote>    &lt;/body&gt;
+                    <?php
+                    highlight_file("../scriptDB/CargaInicialDBSGVDWESProyectoTema4.sql");
+                    ?>
+                </blockquote>    
+                &lt;/body&gt;
             &lt;/html&gt;
             </code>
         </pre>

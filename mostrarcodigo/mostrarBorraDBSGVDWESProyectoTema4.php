@@ -26,8 +26,9 @@
                 &lt;/head&gt;
                 &lt;body&gt;
                 <blockquote>
-                    <span style="color: #DD0000">DROP DATABASE IF EXISTS DB2SGVDWESProyectoTema4;</span>
-                    <span style="color: #DD0000">DROP USER 'userSGVDWESProyectoTema4'@'%';</span>
+                    <?php
+                        highlight_file("../scriptDB/BorraDBSGVDWESProyectoTema4.sql");
+                    ?>
                 </blockquote>    &lt;/body&gt;
             &lt;/html&gt;
             </code>
