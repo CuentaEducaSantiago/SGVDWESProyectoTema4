@@ -31,8 +31,12 @@
                     <th>Borrar Base de datos y Usuario</th>
                     <th><a href="mostrarcodigo/mostrarBorraDBSGVDWESProyectoTema4.php">Mostrar</a></th>
                 </tr>
+                <tr>
+                    <th>Libreria</th>
+                    <th><a href="mostrarcodigo/231018libreriaValidacion.php">Mostrar</a></th>
+                </tr>
             </tbody>
-        </table>
+        </table><br>
         <table>
             <thead>
                 <tr>
@@ -47,27 +51,27 @@
                     <td>1</td>
                     <td>Conexión a la base de datos con la cuenta usuario y tratamiento de errores.</td>
                     <td><a href="codigoPHP/ejercicio01.php">Ejecutar</a></td>
-                    <td><a href="mostrarcodigo/muestraEjercicio01.php">Codigo en progreso</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio01.php">Mostrar</a></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Mostrar el contenido de la tabla Departamento y el número de registros.</td>
                     <td><a href="codigoPHP/ejercicio02.php">Ejecutar</a></td>
-                    <td><a href="mostrarcodigo/muestraEjercicio02.php">Codigo en progreso</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio02.php">Mostrar</a></td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo
-                    DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos).</td>
+                    <td> Formulario para añadir un departamento a la tabla Departamento con validación de entrada y
+                    control de errores.</td>
                     <td><a href="codigoPHP/ejercicio03.php">Ejecutar</a></td>
-                    <td><a href="mostrarcodigo/muestraEjercicio03.php">Codigo en progreso</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio03.php">Mostrar</a></td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo
                     DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos).</td>
                     <td><a href="codigoPHP/ejercicio04.php">Ejecutar</a></td>
-                    <td><a href="mostrarcodigo/muestraEjercicio04.php">Codigo en progreso</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio04.php">Mostrar</a></td>
                 </tr>
             </tbody>
         </table>
