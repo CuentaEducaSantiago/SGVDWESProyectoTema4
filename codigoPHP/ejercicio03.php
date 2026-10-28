@@ -23,11 +23,12 @@
                     ini_set('display_errors', 1);
                     ini_set('display_startup_errors', 1);
                     error_reporting(E_ALL);
+                    require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos
+                    require_once'../core/231018libreriaValidacion.php'; //archivo para validaciones
+                    $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
                 ?>
             <div class="ejercicio">
                 <?php
-                        require_once'../core/231018libreriaValidacion.php'; //archivo para validaciones
-                        require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos   
                         $entradaOk = true;// Variable que nos indica que todo va bien
                         $aErrores = [
                             'Dnombre' => '',
@@ -45,19 +46,17 @@
                         ];// Array donde recogeremos las respuestas correctas (si $entradaOK)
                         try{
                             if(isset($_POST["submit"])){
-                            $miDB = new PDO($host,$USER,$PASSWORD); //conexion a la base de datos
                                 $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
-                                $aRespuestas['Dnombre'] = $_POST['Dnombre'] ?? '';
-                                $aErrores['Dnombre'] ="Error en sintaxis o contenido";
                                 $aRespuestas['Ddescripcion'] = $_POST['Ddescripcion'] ?? '';
                                 $aRespuestas['DFechaCreacion'] = $_POST['DFechaCreacion'] ?? '';
                                 $aRespuestas['Dsaldo'] = $_POST['Dsaldo'] ?? '';
                                 $aRespuestas['DFechaBaja'] = $_POST['DFechaBaja'] ?? '';
+                                $aErrores['Dnombre'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Dnombre'],100,0,1);
                                 $aErrores['Ddescripcion'] = validacionFormularios::comprobarAlfabetico($aRespuestas['Ddescripcion'],100,0,1);
-                                $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
+                                $aErrores['DFechaCreacion'] = validacionFormularios::validarFecha($aRespuestas['DFechaCreacion'],"01/01/2027","01/01/1900", 1);
                                 $aErrores['Dsaldo'] = validacionFormularios::comprobarFloat($aRespuestas['Dsaldo'],100,0,1);
-                                $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja']->format("d/m/Y"),"01/01/2027","01/01/1900", 1);
-                        foreach ($aErrores as $campo => $valor) {
+                                $aErrores['DFechaBaja'] = validacionFormularios::validarFecha($aRespuestas['DFechaBaja'],"01/01/2027","01/01/1900", 1);
+                            foreach ($aErrores as $campo => $valor) {
                                 if($valor !== null){
                                     $entradaOk = false;
                                 }
@@ -91,34 +90,34 @@
                         else{
                         ?>
                     <form name="input" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                        Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre" style="text-transform:uppercase" maxlength="3" value="<?php echo htmlspecialchars($aRespuestas['Dnombre']); ?>"/>
+                        Introduce un departamento: <input type="text" id="Dnombre" name="Dnombre" style="text-transform:uppercase" maxlength="3" value="<?php echo htmlspecialchars($aRespuestas['Dnombre']); ?>" required/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
-                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dnombre']}</span>";}
+                        if(!empty($aErrores['Dnombre'])) {echo "<p><span style='color:red; display:block; font-size:13px;'>{$aErrores['Dnombre']}</span></p>";}
                         ?>
                         <br>
-                        Introduce su descripcion: <input type="text" id="Ddescripcion" name="Ddescripcion"  value="<?php echo htmlspecialchars($aRespuestas['Ddescripcion']); ?>"/>
+                        Introduce su descripcion: <input type="text" id="Ddescripcion" name="Ddescripcion"  value="<?php echo htmlspecialchars($aRespuestas['Ddescripcion']); ?>" required/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
-                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Ddescripcion']}</span>";}
+                        if(!empty($aErrores['Ddescripcion'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Ddescripcion']}</span>";}
                         ?>
                         <br>
-                        Introduce una fecha de creacion: <input type="date" id="DFechaCreacion" name="DFechaCreacion" value="<?php echo htmlspecialchars($aRespuestas['DFechaCreacion']); ?>"/>
+                        Introduce una fecha de creacion: <input type="date" id="DFechaCreacion" name="DFechaCreacion" value="<?php echo htmlspecialchars($aRespuestas['DFechaCreacion']); ?>" required/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
-                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaCreacion']}</span>";}
+                        if(!empty($aErrores['DFechaCreacion'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaCreacion']}</span>";}
                         ?>
                         <br>
-                        Introduce un volumen de departamento: <input type="number" id="Dsaldo" name="Dsaldo" value="<?php echo htmlspecialchars($aRespuestas['Dsaldo']); ?>" step="any"/>
+                        Introduce un volumen de departamento: <input type="number" id="Dsaldo" name="Dsaldo" value="<?php echo htmlspecialchars($aRespuestas['Dsaldo']); ?>" step="any" required/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
-                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dsaldo']}</span>";}
+                        if(!empty($aErrores['Dsaldo'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['Dsaldo']}</span>";}
                         ?>
                         <br>
                         Introduce una fecha de baja de un departamento: <input type="date" id="DFechaBaja" name="DFechaBaja" value="<?php echo htmlspecialchars($aRespuestas['DFechaBaja']); ?>"/>
                         <?php
                         // Mostrar mensajes de error (si los hay y el formulario no se muestra por primera vez)
-                        if(!empty($aErrores['nombre'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaBaja']}</span>";}
+                        if(!empty($aErrores['DFechaBaja'])) {echo "<span style='color:red; display:block; font-size:13px;'>{$aErrores['DFechaBaja']}</span>";}
                         ?>
                         <br>
                         <input type="submit" name="submit" value="Enviar"/>
