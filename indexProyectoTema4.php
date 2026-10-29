@@ -73,6 +73,22 @@
                     <td><a href="codigoPHP/ejercicio04.php">Ejecutar</a></td>
                     <td><a href="mostrarcodigo/muestraEjercicio04.php">Mostrar</a></td>
                 </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pagina web que añade tres registros a nuestra tabla Departamento utilizando tres instrucciones
+                    insert y una transacción, de tal forma que se añadan los tres registros o no se añada ninguno.</td>
+                    <td><a href="codigoPHP/ejercicio05.php">Ejecutar</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio05.php">Mostrar</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Pagina web que cargue registros en la tabla Departamento desde un array departamentosnuevos
+                    utilizando una consulta preparada. (Después de programar y entender este ejercicio, modificar los
+                    ejercicios anteriores para que utilicen consultas preparadas). Probar consultas preparadas sin bind,
+                    pasando los parámetros en un array a execute. .</td>
+                    <td><a href="codigoPHP/ejercicio06.php">Ejecutar</a></td>
+                    <td><a href="mostrarcodigo/muestraEjercicio06.php">Mostrar</a></td>
+                </tr>
             </tbody>
         </table>
         <footer>

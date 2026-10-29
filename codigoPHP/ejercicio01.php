@@ -49,6 +49,10 @@
                 echo "<h2>Error Contraseña</h2><br>";
                 echo $e->getMessage()."<br>";
             }
+            finally {
+            // Cierra la conexion con la base de datos
+                unset($Transaccion);
+            }
         ?>
     </body>
 </html>

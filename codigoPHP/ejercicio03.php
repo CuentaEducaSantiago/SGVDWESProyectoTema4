@@ -128,6 +128,10 @@
             }catch(PDOException $e){//para atrapar excepciones
                 echo $e->getMessage()."<br>";
             }
+            finally {
+            // Cierra la conexion con la base de datos
+                unset($Transaccion);
+            }
             ?>
         </main>
         <footer>
