@@ -24,9 +24,10 @@
          */
             require_once '../core/ConexionDB.php'; //archivo para conexion a la base de datos
             $ok = true;
+            $x='';
             try{
                 $Transaccion=new PDO($host,$USER,$PASSWORD);
-                $ar=array(
+                $array=array(
                     ["T02_CodDepartamento"=> "TRB", "SOS"],
                     ["T02_DescDepartamento"=> "Despartamentop de derechos de los trabajadores", "Despartamentop de sostenivilidad"],
                     ["T02_FechaCreacionDepartamento"=> "2024-01-15 09:00:00", "2020-01-15 09:00:00"],
@@ -34,17 +35,8 @@
                     ["T02_FechaBajaDepartamento"=> "2030-01-15 09:00:00", "2040-01-15 09:00:00"]
                     );
                 $Transaccion->beginTransaction(); //para empezar a probas los nuevos registros
-                foreach($x as $ar){
-                    if($Transaccion->exec("insert into T02_DEPARTAMENTO() values('".$ar["T02_CodDepartamento"]."','".$ar["T02_DescDepartamento"].
-                    "','".$ar["T02_FechaCreacionDepartamento"]."',".$ar["T02_VolumenDeNegocio"].",'".$ar["T02_FechaBajaDepartamento"]."');") == 0) $ok = false;
-                }
-                if ($ok){
-                    $Transaccion->commit(); // Si todo fue bien confirma los cambios
-                    echo "<h3>Check: <a href='ejercicio02.php'>Link Ejercicio 2</a></h3>";
-                }
-                else $Transaccion->rollback(); // y si no, los revierte
-                }
-            catch(PDOException $e){//para atrapar excepciones
+                 
+            }catch(PDOException $e){//para atrapar excepciones
                 echo $e->getMessage()."<br>";
             }
             finally {
